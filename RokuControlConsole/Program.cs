@@ -16,6 +16,10 @@ namespace RokuControlConsole
             {
                 RokuConfig.SetUrl(input);
 
+                var info = await RokuClient.GetRokuInformation(new Uri(RokuConfig.baseUrl + "query/device-info"));
+
+                Console.WriteLine(info);
+
                 Console.WriteLine("Enter your input (x to quit)");
 
                 await GetInput();
@@ -83,9 +87,15 @@ namespace RokuControlConsole
                 case ConsoleKey.OemComma:
                     path = "keypress/VolumeDown";
                     break;
-                //case ConsoleKey.M:
-                    //path = "keypress/Mute";
-                    //break;
+                case ConsoleKey.M:
+                    path = "keypress/VolumeMute";
+                    break;
+                case ConsoleKey.H:
+                    path = "keypress/Home";
+                    break;
+                case ConsoleKey.I:
+                    path = "keypress/Info";
+                    break;
             }
 
             Uri url = new Uri(RokuConfig.baseUrl + path);

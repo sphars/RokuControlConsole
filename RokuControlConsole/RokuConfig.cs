@@ -21,7 +21,9 @@ namespace RokuControlConsole
             ConsoleKey.Backspace,
             ConsoleKey.OemPeriod,
             ConsoleKey.OemComma,
-            ConsoleKey.M
+            ConsoleKey.M,
+            ConsoleKey.H,
+            ConsoleKey.I
         };
 
         public static void SetUrl(string ipAddress) => baseUrl = $"http://{ipAddress}:{port}/";

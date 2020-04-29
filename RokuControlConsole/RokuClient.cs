@@ -34,5 +34,30 @@ namespace RokuControlConsole
 
             return response;            
         }
+
+        public static async Task<string> GetRokuInformation(Uri uri)
+        {
+            string response;
+
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = uri,
+                Content = new StringContent("")
+            };
+
+            HttpResponseMessage result = await client.SendAsync(request);
+
+            if (result.IsSuccessStatusCode)
+                response = await result.Content.ReadAsStringAsync();
+            else
+                response = "error";
+
+            return response;
+        }
     }
 }
