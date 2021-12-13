@@ -21,7 +21,7 @@ namespace RokuControlConsole
 
                 Console.WriteLine(info);
 
-                Console.WriteLine("Enter your input (x to quit)");
+                Console.WriteLine("Enter your input (escape to quit)");
 
                 await GetInput();
             }
@@ -34,7 +34,7 @@ namespace RokuControlConsole
                 do
                 {
                     var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.X)
+                    if (key.Key == ConsoleKey.Escape)
                     {
                         RokuConfig.SetDone();
                     }
@@ -96,6 +96,15 @@ namespace RokuControlConsole
                     break;
                 case ConsoleKey.I:
                     path = "keypress/Info";
+                    break;
+                case ConsoleKey.Z:
+                    path = "keypress/Rev";
+                    break;
+                case ConsoleKey.X:
+                    path = "keypress/Fwd";
+                    break;
+                case ConsoleKey.C:
+                    path = "keypress/InstantReplay";
                     break;
             }
 

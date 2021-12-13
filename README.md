@@ -15,6 +15,11 @@ All commands are sent to your Roku device using your keyboard.
 | Right			| Right Arrow	| DPad Right		|
 | Enter/OK		| Enter			| OK				|
 | Play/Pause	| Spacebar		| Play/Pause		|
-| Volume Up		| Period (.)	| Volume Up			|
-| Volume Down	| Comma (,)		| Volume Down		|
+| Reverse		| Z				| Rewind			|
+| Forward		| X				| Forward			|
+| Replay		| C				| Replay			|
+| Volume Up		| .				| Volume Up			|
+| Volume Down	| ,				| Volume Down		|
 | Mute			| M				| Mute				|
+
+Press the Escape key at anytime to exit the application.

@@ -23,7 +23,10 @@ namespace RokuControlConsole
             ConsoleKey.OemComma, //volume down
             ConsoleKey.M, //mute
             ConsoleKey.H, //home button
-            ConsoleKey.I //info (*) button
+            ConsoleKey.I, //info (*) button
+            ConsoleKey.Z, //reverse
+            ConsoleKey.X, //forward
+            ConsoleKey.C //replay
         };
 
         public static void SetUrl(string ipAddress) => baseUrl = $"http://{ipAddress}:{port}/";
