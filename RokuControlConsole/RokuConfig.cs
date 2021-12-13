@@ -12,18 +12,18 @@ namespace RokuControlConsole
 
         private static List<ConsoleKey> validKeys = new List<ConsoleKey>
         {
-            ConsoleKey.UpArrow,
-            ConsoleKey.DownArrow,
-            ConsoleKey.LeftArrow,
-            ConsoleKey.RightArrow,
-            ConsoleKey.Enter,
-            ConsoleKey.Spacebar,
-            ConsoleKey.Backspace,
-            ConsoleKey.OemPeriod,
-            ConsoleKey.OemComma,
-            ConsoleKey.M,
-            ConsoleKey.H,
-            ConsoleKey.I
+            ConsoleKey.UpArrow, //dpad up
+            ConsoleKey.DownArrow, //dpad down
+            ConsoleKey.LeftArrow, //dpad left
+            ConsoleKey.RightArrow, //dpad right
+            ConsoleKey.Enter, //ok button
+            ConsoleKey.Spacebar, //play button
+            ConsoleKey.Backspace, //back button
+            ConsoleKey.OemPeriod, //volume up
+            ConsoleKey.OemComma, //volume down
+            ConsoleKey.M, //mute
+            ConsoleKey.H, //home button
+            ConsoleKey.I //info (*) button
         };
 
         public static void SetUrl(string ipAddress) => baseUrl = $"http://{ipAddress}:{port}/";

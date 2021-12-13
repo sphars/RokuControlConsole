@@ -8,6 +8,7 @@ namespace RokuControlConsole
         static async Task Main(string[] args)
         {
             Console.Title = "Roku Control Console";
+            Console.WriteLine("Roku Control Console");
             Console.Write("Enter your Roku device's IP address: ");
             string input = Console.ReadLine();
 
