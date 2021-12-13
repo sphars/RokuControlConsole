@@ -41,74 +41,26 @@ namespace RokuControlConsole
                     else if (!RokuConfig.IsValidKey(key.Key))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"invalid key: {key.Key}");
+                        Console.WriteLine($"Invalid key: {key.Key}");
                         Console.ResetColor();
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"valid key: {key.Key}");
+                        var command = RokuConfig.GetRokuCommand(key);
+                        Console.WriteLine($"Valid key: {command.Key} - {command.Name}");
                         Console.ResetColor();
-                        SendRokuCommand(key.Key);
+                        SendRokuCommand(command);
                     }
                 } while (!RokuConfig.IsDone);
             };
             await Task.Run(work);
         }
 
-        private static void SendRokuCommand(ConsoleKey key)
+        private static void SendRokuCommand(RokuCommand command)
         {
-            var path = "";
-            switch (key)
-            {
-                case ConsoleKey.UpArrow:
-                    path = "keypress/Up";
-                    break;
-                case ConsoleKey.DownArrow:
-                    path = "keypress/Down";
-                    break;
-                case ConsoleKey.LeftArrow:
-                    path = "keypress/Left";
-                    break;
-                case ConsoleKey.RightArrow:
-                    path = "keypress/Right";
-                    break;
-                case ConsoleKey.Enter:
-                    path = "keypress/Select";
-                    break;
-                case ConsoleKey.Spacebar:
-                    path = "keypress/Play";
-                    break;
-                case ConsoleKey.Backspace:
-                    path = "keypress/Back";
-                    break;
-                case ConsoleKey.OemPeriod:
-                    path = "keypress/VolumeUp";
-                    break;
-                case ConsoleKey.OemComma:
-                    path = "keypress/VolumeDown";
-                    break;
-                case ConsoleKey.M:
-                    path = "keypress/VolumeMute";
-                    break;
-                case ConsoleKey.H:
-                    path = "keypress/Home";
-                    break;
-                case ConsoleKey.I:
-                    path = "keypress/Info";
-                    break;
-                case ConsoleKey.Z:
-                    path = "keypress/Rev";
-                    break;
-                case ConsoleKey.X:
-                    path = "keypress/Fwd";
-                    break;
-                case ConsoleKey.C:
-                    path = "keypress/InstantReplay";
-                    break;
-            }
 
-            Uri url = new Uri(RokuConfig.baseUrl + path);
+            Uri url = new Uri(RokuConfig.baseUrl + command.Path);
 
             var t = Task.Run(() => RokuClient.PostCommand(url, ""));
             t.Wait();

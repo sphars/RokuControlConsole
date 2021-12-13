@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RokuControlConsole
 {
@@ -10,30 +11,111 @@ namespace RokuControlConsole
 
         public static bool IsDone { get; private set; }
 
-        private static List<ConsoleKey> validKeys = new List<ConsoleKey>
+        private static readonly List<RokuCommand> RokuCommands = new List<RokuCommand>
         {
-            ConsoleKey.UpArrow, //dpad up
-            ConsoleKey.DownArrow, //dpad down
-            ConsoleKey.LeftArrow, //dpad left
-            ConsoleKey.RightArrow, //dpad right
-            ConsoleKey.Enter, //ok button
-            ConsoleKey.Spacebar, //play button
-            ConsoleKey.Backspace, //back button
-            ConsoleKey.OemPeriod, //volume up
-            ConsoleKey.OemComma, //volume down
-            ConsoleKey.M, //mute
-            ConsoleKey.H, //home button
-            ConsoleKey.I, //info (*) button
-            ConsoleKey.Z, //reverse
-            ConsoleKey.X, //forward
-            ConsoleKey.C //replay
+            new RokuCommand
+            {
+                Name = "Home",
+                Path = "keypress/Home",
+                Key = ConsoleKey.H
+            },
+            new RokuCommand
+            {
+                Name = "Back",
+                Path = "keypress/Back",
+                Key = ConsoleKey.Backspace
+            },
+            new RokuCommand
+            {
+                Name = "Up",
+                Path = "keypress/Up",
+                Key = ConsoleKey.UpArrow
+            },
+            new RokuCommand
+            {
+                Name = "Down",
+                Path = "keypress/Down",
+                Key = ConsoleKey.DownArrow
+            },
+            new RokuCommand
+            {
+                Name = "Left",
+                Path = "keypress/Left",
+                Key = ConsoleKey.LeftArrow
+            },
+            new RokuCommand
+            {
+                Name = "Right",
+                Path = "keypress/Right",
+                Key = ConsoleKey.RightArrow
+            },
+            new RokuCommand
+            {
+                Name = "Select",
+                Path = "keypress/Select",
+                Key = ConsoleKey.Enter
+            },
+            new RokuCommand
+            {
+                Name = "Play/Pause",
+                Path = "keypress/Play",
+                Key = ConsoleKey.Spacebar
+            },
+            new RokuCommand
+            {
+                Name = "Info",
+                Path = "keypress/Info",
+                Key = ConsoleKey.I
+            },
+            new RokuCommand
+            {
+                Name = "Reverse",
+                Path = "keypress/Rev",
+                Key = ConsoleKey.Z
+            },
+            new RokuCommand
+            {
+                Name = "Forward",
+                Path = "keypress/Fwd",
+                Key = ConsoleKey.X
+            },
+            new RokuCommand
+            {
+                Name = "Replay",
+                Path = "keypress/InstantReplay",
+                Key = ConsoleKey.C
+            },
+            new RokuCommand
+            {
+                Name = "Volume Up",
+                Path = "keypress/VolumeUp",
+                Key = ConsoleKey.OemPeriod
+            },
+            new RokuCommand
+            {
+                Name = "Volume Down",
+                Path = "keypress/VolumeDown",
+                Key = ConsoleKey.OemComma
+            },
+            new RokuCommand
+            {
+                Name = "Mute",
+                Path = "keypress/VolumeMute",
+                Key = ConsoleKey.M
+            }
         };
 
         public static void SetUrl(string ipAddress) => baseUrl = $"http://{ipAddress}:{port}/";
 
         public static bool IsValidKey(ConsoleKey consoleKey)
         {
-            return validKeys.Contains(consoleKey);
+            bool isValidKey = RokuCommands.Any(c => c.Key == consoleKey);
+            return isValidKey;
+        }
+
+        public static RokuCommand GetRokuCommand(ConsoleKeyInfo consoleKey)
+        {
+            return RokuCommands.FirstOrDefault(c => c.Key == consoleKey.Key);
         }
 
         public static void SetDone() => IsDone = true;

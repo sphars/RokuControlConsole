@@ -13,8 +13,9 @@ All commands are sent to your Roku device using your keyboard.
 | Down			| Down Arrow	| DPad Down			|
 | Left			| Left Arrow	| DPad Left			|
 | Right			| Right Arrow	| DPad Right		|
-| Enter/OK		| Enter			| OK				|
+| Select		| Enter			| OK				|
 | Play/Pause	| Spacebar		| Play/Pause		|
+| Info			| I				| Info/*			|
 | Reverse		| Z				| Rewind			|
 | Forward		| X				| Forward			|
 | Replay		| C				| Replay			|
