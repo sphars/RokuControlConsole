@@ -6,12 +6,12 @@ namespace RokuControlConsole
 {
     public static class RokuConfig
     {
-        public static string baseUrl { get; private set; }
-        private static string port = "8060";
-
+        private static readonly string port = "8060";
+        public static string BaseUrl { get; private set; }
         public static bool IsDone { get; private set; }
 
-        private static readonly List<RokuCommand> RokuCommands = new List<RokuCommand>
+
+        private static readonly List<RokuCommand> RokuCommands = new()
         {
             new RokuCommand
             {
@@ -105,7 +105,7 @@ namespace RokuControlConsole
             }
         };
 
-        public static void SetUrl(string ipAddress) => baseUrl = $"http://{ipAddress}:{port}/";
+        public static void SetUrl(string ipAddress) => BaseUrl = $"http://{ipAddress}:{port}/";
 
         public static bool IsValidKey(ConsoleKey consoleKey)
         {

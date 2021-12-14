@@ -9,7 +9,7 @@ namespace RokuControlConsole
 {
     public static class RokuClient
     {
-        private static HttpClient client = new HttpClient();
+        private static HttpClient client = new();
 
         public static async Task<string> PostCommand(Uri uri, string content)
         {

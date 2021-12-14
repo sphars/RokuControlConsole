@@ -17,7 +17,7 @@ namespace RokuControlConsole
             {
                 RokuConfig.SetUrl(input);
 
-                var info = await RokuClient.GetRokuInformation(new Uri(RokuConfig.baseUrl + "query/device-info"));
+                var info = await RokuClient.GetRokuInformation(new Uri(RokuConfig.BaseUrl + "query/device-info"));
 
                 Console.WriteLine(info);
 
@@ -54,13 +54,14 @@ namespace RokuControlConsole
                     }
                 } while (!RokuConfig.IsDone);
             };
+
             await Task.Run(work);
         }
 
         private static void SendRokuCommand(RokuCommand command)
         {
 
-            Uri url = new Uri(RokuConfig.baseUrl + command.Path);
+            Uri url = new(RokuConfig.BaseUrl + command.Path);
 
             var t = Task.Run(() => RokuClient.PostCommand(url, ""));
             t.Wait();
