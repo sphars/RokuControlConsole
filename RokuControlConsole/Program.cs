@@ -11,7 +11,13 @@ namespace RokuControlConsole
         {
             Console.Title = "Roku Control Console";
             Console.WriteLine("Roku Control Console");
-            Console.Write("Enter your Roku device's IP address: ");
+
+            RokuDataOperations dataOperations = RokuDataOperations.Instance();
+            await dataOperations.LoadDevices();
+            dataOperations.PrintSavedDevices();
+
+            Console.WriteLine();
+            Console.Write("Enter a Roku device IP address to control: ");
             string input = Console.ReadLine();
 
             // TODO: validate IP address
@@ -21,8 +27,12 @@ namespace RokuControlConsole
 
                 var response = await RokuClient.GetRokuInformation(new Uri(RokuConfig.BaseUrl + "query/device-info"));
                 var rokuDeviceInfo = RokuDataOperations.DeserializeXMLToRokuDevice(response);
+                rokuDeviceInfo.IPAddress = input;
+                
+                dataOperations.AddRokuDevice(rokuDeviceInfo.Udn, rokuDeviceInfo);
+                await dataOperations.SaveDevices();
 
-                Console.WriteLine(rokuDeviceInfo.FriendlyDeviceName);
+                Console.WriteLine($"Now controlling {rokuDeviceInfo.FriendlyDeviceName} ({rokuDeviceInfo.ModelName})");
 
                 Console.WriteLine("Enter your input (escape to quit)");
 
@@ -51,9 +61,9 @@ namespace RokuControlConsole
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         var command = RokuConfig.GetRokuCommand(key);
-                        Console.WriteLine($"Valid key: {command.Key} - {command.Name}");
+                        Console.WriteLine($"Input: {command.Key} | Command: {command.Name}");
                         Console.ResetColor();
-                        RokuDataOperations.SendRokuCommand(command);
+                        RokuClient.SendRokuCommand(command);
                     }
                 } while (!RokuConfig.IsDone);
             };

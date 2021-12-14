@@ -11,7 +11,6 @@ namespace RokuControlConsole.Data
         public static string BaseUrl { get; private set; }
         public static bool IsDone { get; private set; }
 
-
         private static readonly List<RokuCommand> RokuCommands = new()
         {
             new RokuCommand
@@ -103,6 +102,18 @@ namespace RokuControlConsole.Data
                 Name = "Mute",
                 Path = "keypress/VolumeMute",
                 Key = ConsoleKey.M
+            },
+            new RokuCommand
+            {
+                Name = "Power On",
+                Path = "keypress/PowerOn",
+                Key = ConsoleKey.P
+            },
+            new RokuCommand
+            {
+                Name = "Power Off",
+                Path = "keypress/PowerOff",
+                Key = ConsoleKey.O
             }
         };
 

@@ -22,5 +22,7 @@ All commands are sent to your Roku device using your keyboard.
 | Volume Up		| .				| Volume Up			|
 | Volume Down	| ,				| Volume Down		|
 | Mute			| M				| Mute				|
+| Power On		| P				| Power On (TV) 	|
+| Power Off		| O				| Power Off (TV)	|
 
 Press the Escape key at anytime to exit the application.

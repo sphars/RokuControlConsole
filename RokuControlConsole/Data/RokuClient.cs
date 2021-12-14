@@ -4,6 +4,7 @@ using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using RokuControlConsole.Models;
 
 namespace RokuControlConsole.Data
 {
@@ -34,6 +35,18 @@ namespace RokuControlConsole.Data
 
             return response;            
         }
+
+        public static void SendRokuCommand(RokuCommand command)
+        {
+
+            Uri url = new(RokuConfig.BaseUrl + command.Path);
+
+            var t = Task.Run(() => PostCommand(url, ""));
+            t.Wait();
+
+            Console.WriteLine(t.Result);
+        }
+
 
         public static async Task<string> GetRokuInformation(Uri uri)
         {

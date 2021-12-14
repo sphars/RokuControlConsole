@@ -227,5 +227,8 @@ namespace RokuControlConsole.Models
 		[XmlElement(ElementName = "davinci-version")]
 		public string DavinciVersion { get; set; }
 
-	}
+		[XmlIgnore]
+        public string IPAddress { get; set; }
+
+    }
 }
