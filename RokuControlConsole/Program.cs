@@ -1,11 +1,13 @@
-﻿using System;
+﻿using RokuControlConsole.Data;
+using RokuControlConsole.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace RokuControlConsole
 {
     class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Console.Title = "Roku Control Console";
             Console.WriteLine("Roku Control Console");
@@ -17,9 +19,10 @@ namespace RokuControlConsole
             {
                 RokuConfig.SetUrl(input);
 
-                var info = await RokuClient.GetRokuInformation(new Uri(RokuConfig.BaseUrl + "query/device-info"));
+                var response = await RokuClient.GetRokuInformation(new Uri(RokuConfig.BaseUrl + "query/device-info"));
+                var rokuDeviceInfo = RokuDataOperations.DeserializeXMLToRokuDevice(response);
 
-                Console.WriteLine(info);
+                Console.WriteLine(rokuDeviceInfo.FriendlyDeviceName);
 
                 Console.WriteLine("Enter your input (escape to quit)");
 
@@ -50,23 +53,12 @@ namespace RokuControlConsole
                         var command = RokuConfig.GetRokuCommand(key);
                         Console.WriteLine($"Valid key: {command.Key} - {command.Name}");
                         Console.ResetColor();
-                        SendRokuCommand(command);
+                        RokuDataOperations.SendRokuCommand(command);
                     }
                 } while (!RokuConfig.IsDone);
             };
 
             await Task.Run(work);
-        }
-
-        private static void SendRokuCommand(RokuCommand command)
-        {
-
-            Uri url = new(RokuConfig.BaseUrl + command.Path);
-
-            var t = Task.Run(() => RokuClient.PostCommand(url, ""));
-            t.Wait();
-
-            Console.WriteLine(t.Result);
         }
     }
 }

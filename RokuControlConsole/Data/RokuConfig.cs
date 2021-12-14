@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RokuControlConsole.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RokuControlConsole
+namespace RokuControlConsole.Data
 {
     public static class RokuConfig
     {

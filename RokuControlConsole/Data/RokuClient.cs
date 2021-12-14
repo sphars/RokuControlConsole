@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 
-namespace RokuControlConsole
+namespace RokuControlConsole.Data
 {
     public static class RokuClient
     {
