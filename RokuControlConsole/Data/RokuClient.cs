@@ -12,13 +12,12 @@ namespace RokuControlConsole.Data
     {
         private static HttpClient client = new();
 
-        public static async Task<string> PostCommand(Uri uri, string content)
+        private static async Task<string> PostCommand(Uri uri, string content)
         {
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpRequestMessage request = new HttpRequestMessage
+            HttpRequestMessage request = new()
             {
                 Method = HttpMethod.Post,
                 RequestUri = uri,
@@ -53,10 +52,9 @@ namespace RokuControlConsole.Data
             string response;
 
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpRequestMessage request = new HttpRequestMessage
+            HttpRequestMessage request = new()
             {
                 Method = HttpMethod.Get,
                 RequestUri = uri,

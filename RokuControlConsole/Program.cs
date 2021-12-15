@@ -20,9 +20,10 @@ namespace RokuControlConsole
             Console.Write("Enter a Roku device IP address to control: ");
             string input = Console.ReadLine();
 
-            // TODO: validate IP address
             if (!string.IsNullOrWhiteSpace(input))
             {
+                // TODO: validate input IP address
+                    
                 RokuConfig.SetUrl(input);
 
                 var response = await RokuClient.GetRokuInformation(new Uri(RokuConfig.BaseUrl + "query/device-info"));
